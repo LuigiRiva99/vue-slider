@@ -36,13 +36,21 @@ createApp({
 
     methods : {
         loopPrev: function(){
-            if (currentSlideIndex === 0) {
-                currentSlideIndex = 4
+            if (this.currentSlideIndex === 0) {
+                this.currentSlideIndex = 4
             } else {
-                currentSlideIndex--
+                this.currentSlideIndex--
+            }
+        },
+        
+        loopNext: function() {
+            if (this.currentSlideIndex === 4) {
+                this.currentSlideIndex = 0
+            } else {
+                this.currentSlideIndex++
             }
         }
-    }
+    }    
 }).mount('#app')
 
 
