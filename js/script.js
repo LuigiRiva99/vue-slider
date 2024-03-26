@@ -49,8 +49,12 @@ createApp({
             } else {
                 this.currentSlideIndex++
             }
-        }
-    }    
+        },
+    },
+    
+    mounted() {
+        setInterval(this.loopNext, 3000)
+    }
 }).mount('#app')
 
 
