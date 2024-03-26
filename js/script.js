@@ -3,6 +3,7 @@ const { createApp } = Vue
 createApp({
     data() {
       return {
+        timer: null,
         currentSlideIndex: 0,
           slides : [
              {
@@ -51,23 +52,19 @@ createApp({
                 this.currentSlideIndex++
             }
         },
+
+        loopBreak() {
+            clearInterval(timer)
+        },
+
+        loopReset() {
+            timer = setInterval(this.loopNext, 3000)
+        }
     },
     
     mounted() {
-
         //autoplay
-        let timer = setInterval(this.loopNext, 3000);
-
-        //blocco autoplay quando sono over con il mouse
-        const sliderContainer = document.querySelector('.slider-wrapper');
-        sliderContainer.addEventListener('mouseover', function() {
-            clearInterval(timer)
-        });
-
-        //riprendo autoplay quando tolgo il mouse
-        sliderContainer.addEventListener('mouseleave', function() {
-            timer = setInterval(this.loopNext, 3000);
-        })
+        timer = setInterval(this.loopNext, 3000)
     }
 }).mount('#app')
 
