@@ -35,6 +35,7 @@ createApp({
     },
 
     methods : {
+        //funzione per selezionare la precedente immagine 
         loopPrev: function(){
             if (this.currentSlideIndex === 0) {
                 this.currentSlideIndex = 4
@@ -42,7 +43,7 @@ createApp({
                 this.currentSlideIndex--
             }
         },
-        
+        //funzione per selezionare la prossiva immagine 
         loopNext: function() {
             if (this.currentSlideIndex === 4) {
                 this.currentSlideIndex = 0
@@ -53,7 +54,20 @@ createApp({
     },
     
     mounted() {
-        setInterval(this.loopNext, 3000)
+
+        //autoplay
+        let timer = setInterval(this.loopNext, 3000);
+
+        //blocco autoplay quando sono over con il mouse
+        const sliderContainer = document.querySelector('.slider-wrapper');
+        sliderContainer.addEventListener('mouseover', function() {
+            clearInterval(timer)
+        });
+
+        //riprendo autoplay quando tolgo il mouse
+        sliderContainer.addEventListener('mouseleave', function() {
+            timer = setInterval(this.loopNext, 3000);
+        })
     }
 }).mount('#app')
 
